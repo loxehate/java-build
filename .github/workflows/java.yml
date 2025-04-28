@@ -31,5 +31,5 @@ jobs:
           name: java demo
           tag_name: latest
           files: |
-            ./backend/target/*.jar
+            ./backend/jeelowcode-admin/target/*.jar
           token: ${{ secrets.Release_TOKEN }}
