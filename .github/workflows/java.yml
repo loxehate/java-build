@@ -18,11 +18,11 @@ jobs:
           java-version: '8'
           cache: 'maven'
   
-      - name: 查看 Maven 版本（确认）
+      - name: 查看 Maven 版本
         run: mvn -v
 
       - name: 项目打包
-        run: cd backend && mvn -B package -Plocal -f pom.xml
+        run: cd backend && mvn -B package -Plocal -f pom.xml && find . -name "*.jar" -exec ls {} \;
 
       - name: 生成 GitHub Release
         id: create_release
