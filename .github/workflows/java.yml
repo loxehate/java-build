@@ -24,6 +24,13 @@ jobs:
       - name: 项目打包
         run: cd backend && mvn -B package -Plocal -f pom.xml && find . -name "*.jar" -exec ls {} \;
 
+      - name: 读取打包生成的 JAR 文件名
+        id: get_jar
+        run: |
+          JAR_NAME=$(ls backend/target/*.jar | grep -v 'original-' | head -n 1)
+          echo "JAR_PATH=$JAR_NAME" >> $GITHUB_ENV
+          echo "找到打包文件: $JAR_NAME"
+
       - name: 生成 GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v2

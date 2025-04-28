@@ -1,17 +1,8 @@
-######################################################################
-# Build Tools
-
-.gradle
-/build/
-!gradle/wrapper/gradle-wrapper.jar
-
+HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
-
-.flattened-pom.xml
-
-######################################################################
-# IDE
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 ### STS ###
 .apt_generated
@@ -20,6 +11,7 @@ target/
 .project
 .settings
 .springBeans
+.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
@@ -28,26 +20,14 @@ target/
 *.ipr
 
 ### NetBeans ###
-nbproject/private/
-build/*
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
 
-######################################################################
-# Others
-*.log
-*.xml.versionsBackup
-*.swp
-
-!*/build/*.java
-!*/build/*.html
-!*/build/*.xml
-
-### JRebel ###
-rebel.xml
-
-application-my.yaml
-
-/yudao-ui-app/unpackage/
+### VS Code ###
+.vscode/
