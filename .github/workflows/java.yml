@@ -1,4 +1,4 @@
-name: Node.js CI/CD Workflow
+name: java CI/CD Workflow
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
         run: mvn -v
 
       - name: 项目打包
-        run: mvn -B package -Pdev --file pom.xml
+        run: cd backend && mvn -B package -Pdev -f pom.xml
 
       - name: 生成 GitHub Release
         id: create_release
@@ -31,5 +31,5 @@ jobs:
           name: backend latest
           tag_name: latest
           files: |
-            ./backend/target/backend.jar
+            ./backend/target/*.jar
           token: ${{ secrets.Release_TOKEN }}
