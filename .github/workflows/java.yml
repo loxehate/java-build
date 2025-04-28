@@ -22,21 +22,22 @@ jobs:
         run: mvn -v
 
       - name: 项目打包
-        run: cd backend && mvn -B package -Plocal -f pom.xml && find . -name "*.jar" -exec ls {} \;
+        run: cd backend && mvn -B package -Plocal -f pom.xml
 
       - name: 读取打包生成的 JAR 文件名
         id: get_jar
         run: |
-          JAR_NAME=$(ls backend/target/*.jar | grep -v 'original-' | head -n 1)
-          echo "JAR_PATH=$JAR_NAME" >> $GITHUB_ENV
+          JAR_PATH=$(ls backend/target/*.jar | grep -v 'original-' | head -n 1)
+          JAR_NAME=$(basename $JAR_PATH)
+          echo "JAR_NAME=$JAR_NAME" >> $GITHUB_ENV
+          echo "JAR_PATH=$JAR_PATH" >> $GITHUB_ENV
           echo "找到打包文件: $JAR_NAME"
 
       - name: 生成 GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
-          name: java demo
+          name: ${{ env.JAR_NAME }}
           tag_name: latest
-          files: |
-            ./backend/jeelowcode-admin/target/*.jar
+          files: ${{ env.JAR_PATH }}
           token: ${{ secrets.Release_TOKEN }}
